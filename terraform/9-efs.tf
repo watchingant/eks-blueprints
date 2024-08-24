@@ -15,17 +15,17 @@ resource "aws_efs_file_system" "eks" {
 }
 
 #
- resource "aws_efs_mount_target" "zone_a" {
-   file_system_id  = aws_efs_file_system.eks.id
-   subnet_id       = aws_subnet.private_us_east_1a.id
-   security_groups = [module.eks_blueprints.cluster_primary_security_group_id]
- }
-
- resource "aws_efs_mount_target" "zone_b" {
-   file_system_id  = aws_efs_file_system.eks.id
-   subnet_id       = aws_subnet.private_us_east_1b.id
-   security_groups = [module.eks_blueprints.cluster_primary_security_group_id]
- }
+# resource "aws_efs_mount_target" "zone_a" {
+#   file_system_id  = aws_efs_file_system.eks.id
+#   subnet_id       = aws_subnet.private_us_east_1a.id
+#   security_groups = [module.eks_blueprints.cluster_primary_security_group_id]
+# }
+#
+# resource "aws_efs_mount_target" "zone_b" {
+#   file_system_id  = aws_efs_file_system.eks.id
+#   subnet_id       = aws_subnet.private_us_east_1b.id
+#   security_groups = [module.eks_blueprints.cluster_primary_security_group_id]
+# }
 #
 resource "aws_efs_mount_target" "zone" {
   for_each = toset(module.vpc.private_subnets)
